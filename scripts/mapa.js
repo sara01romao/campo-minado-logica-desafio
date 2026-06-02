@@ -19,7 +19,7 @@ class CampoMinado{
     this.inicializaMapa();
     this.adicionarMinasMapa();
     this.vericarQtdMinas();
-    // this.imprimir();
+    this.imprimir();
   }
 
   calcQtdMinas(){
@@ -58,22 +58,26 @@ class CampoMinado{
     }
   }
 
+  posicoesEnvolta(linha, coluna){
+    let leste = [ linha, coluna + 1 ];
+    let oeste = [linha,  coluna - 1];
+    let norte = [ linha - 1, coluna];
+    let sul = [linha + 1 , coluna];
+    let nordeste = [linha - 1 , coluna + 1];
+    let noroeste = [linha - 1, coluna - 1 ];
+    let sudeste = [linha + 1 , coluna + 1 ];
+    let sudoeste = [linha + 1, coluna - 1 ];
+  
+    return [leste, oeste, norte, sul, nordeste, noroeste, sudeste, sudoeste];
+  }
+
   vericarQtdMinas(){
     for (let linha = 0; linha < this.mapa.length; linha++) {
       for (let coluna = 0; coluna < this.mapa.length; coluna++) {
 
         if((this.mapa[linha][coluna] !== 9)){
 
-          let leste = [ linha, coluna + 1 ];
-          let oeste = [linha,  coluna - 1];
-          let norte = [ linha - 1, coluna];
-          let sul = [linha + 1 , coluna];
-          let nordeste = [linha - 1 , coluna + 1];
-          let noroeste = [linha - 1, coluna - 1 ];
-          let sudeste = [linha + 1 , coluna + 1 ];
-          let sudoeste = [linha + 1, coluna - 1 ];
-        
-          let posicoes = [leste, oeste, norte, sul, nordeste, noroeste, sudeste, sudoeste];
+          let posicoes = this.posicoesEnvolta(linha, coluna);
           let count = 0;
           
           for(let indexPosicao = 0; indexPosicao < posicoes.length; indexPosicao++){
@@ -103,8 +107,9 @@ class CampoMinado{
     
     this.mapa.forEach((element, index) => {
       console.log( index, "|",element.join('  '), "|");
-
     });
 
   }
 }
+
+CampoMinado.Mapa()
