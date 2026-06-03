@@ -1,4 +1,4 @@
-class CampoMinado{
+export class MapaGenerate{
   constructor(tamanho, dificuldade){
     this.tamanhoMatriz = tamanho ?? 6;
     this.dificuldade = dificuldade ?? 0.5;
@@ -8,7 +8,7 @@ class CampoMinado{
   }
 
   static Mapa(tamanho, dificuldade){
-    const novoMapa = new CampoMinado(tamanho, dificuldade);
+    const novoMapa = new MapaGenerate(tamanho, dificuldade);
     novoMapa.initialize();
     return novoMapa.mapa;
   }
@@ -76,7 +76,6 @@ class CampoMinado{
       for (let coluna = 0; coluna < this.mapa.length; coluna++) {
 
         if((this.mapa[linha][coluna] !== 9)){
-
           let posicoes = this.posicoesEnvolta(linha, coluna);
           let count = 0;
           
@@ -112,4 +111,3 @@ class CampoMinado{
   }
 }
 
-CampoMinado.Mapa()
