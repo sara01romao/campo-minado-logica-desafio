@@ -1,4 +1,4 @@
-import { MapaMinado} from "./mapa.js";
+import {MapaMinado} from "./mapa.js";
 
 const level = {
   facil: 0.1,
@@ -12,7 +12,7 @@ const mode = {
   especialista: 12,
 };
 
-class LogicStatus extends MapaMinado {
+class Jogo extends MapaMinado {
   constructor(tamanho, dificuldade) {
     super();
     this.vitorias = 0;
@@ -147,7 +147,7 @@ class LogicStatus extends MapaMinado {
   }
 }
 
-let game = new LogicStatus();
+let game = new Jogo();
 game.init();
 // game.jogada(0,15)
 
