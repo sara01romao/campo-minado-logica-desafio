@@ -1,21 +1,21 @@
-export class MapaGenerate{
+export class MapaMinado{
   constructor(tamanho, dificuldade){
     this.tamanhoMatriz = tamanho ?? 6;
-    this.dificuldade = dificuldade ?? 0.5;
+    this.dificuldade = dificuldade ?? 0.3;
     this.qtdMinas = 0;
-    this.listaMinas = [];
+    this.listaMinas = [[0,2], [1,3], [4,1], [4,2]];
     this.mapa = [];
   }
 
   static Mapa(tamanho, dificuldade){
-    const novoMapa = new MapaGenerate(tamanho, dificuldade);
+    const novoMapa = new MapaMinado(tamanho, dificuldade);
     novoMapa.initialize();
     return novoMapa.mapa;
   }
 
   initialize(){
     this.calcQtdMinas();
-    this.criarMinas();
+    // this.criarMinas();
     this.inicializaMapa();
     this.adicionarMinasMapa();
     this.vericarQtdMinas();
@@ -23,7 +23,7 @@ export class MapaGenerate{
   }
 
   calcQtdMinas(){
-   return this.qtdMinas = Math.floor(Math.pow(this.tamanhoMatriz - 1, 2) * this.dificuldade)
+   return this.qtdMinas = Math.floor(Math.pow(this.tamanhoMatriz - 1, 2) * this.dificuldade);
   }
 
   geradorPosicaoMina() {
@@ -52,12 +52,12 @@ export class MapaGenerate{
   }
 
   adicionarMinasMapa(){
-    for (let indexMina = 0; indexMina< this.listaMinas.length; indexMina++) {
+    for (let indexMina = 0; indexMina < this.listaMinas.length; indexMina++) {
       const [x, y] = this.listaMinas[indexMina];
       this.mapa[x][y] = 9;
     }
   }
-
+ 
   posicoesEnvolta(linha, coluna){
     let leste = [ linha, coluna + 1 ];
     let oeste = [linha,  coluna - 1];
@@ -107,7 +107,6 @@ export class MapaGenerate{
     this.mapa.forEach((element, index) => {
       console.log( index, "|",element.join('  '), "|");
     });
-
   }
 }
 
