@@ -57,8 +57,8 @@ class Jogo extends MapaMinado {
   
     this.jogadasFeitas.push([linha, coluna]);
     this.revelarPosicoes(linha, coluna);
+    this.imprimirStatus();
     this.verificarPartida();
-    // this.imprimirStatus();
   }
 
   revelarPosicoes(linha, coluna) {
@@ -139,6 +139,6 @@ class Jogo extends MapaMinado {
       console.log(index, "|", element.join("  "), "|");
     });
 
-    this.verificarPartida();
+    // this.verificarPartida();
   }
 }
