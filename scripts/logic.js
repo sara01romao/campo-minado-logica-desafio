@@ -1,4 +1,4 @@
-import {MapaMinado} from "./mapa.js";
+// import {MapaMinado} from "./mapa.js";
 
 const level = {
   facil: 0.1,
@@ -9,24 +9,24 @@ const level = {
 const mode = {
   iniciante: 6,
   intermediario: 8,
-  especialista: 12,
+  especialista: 10,
 };
 
 class Jogo extends MapaMinado {
   constructor(tamanho, dificuldade) {
-    super();
-    this.vitorias = 0;
-    this.derotas = 0;
-    this.statusGame = true;
+    super(mode[tamanho], level[dificuldade]);
+    this.vitoria = false;
+    this.derrota = false;
+    this.partidaAtiva = true;
     this.jogadasFeitas = [];
     this.totalPosicaoLivres = Math.pow(this.tamanhoMatriz, 2) - this.calcQtdMinas();
     this.posicaoReveladas = [];
-    this.mapa = LogicStatus.Mapa(mode.tamanho, level.dificuldade);
+    this.mapa = Jogo.Mapa(mode[tamanho], level[dificuldade]);
     this.mapaJogadas = [];
   }
 
   init() {
-    this.mapaPlayerInit();
+    this.mapaPlayerInit(); 
     // this.imprimirStatus();
   }
 
@@ -41,14 +41,12 @@ class Jogo extends MapaMinado {
   }
 
   jogada(linha, coluna) {
-
-    if(this.posicaoReveladas.length == (Math.pow(this.tamanhoMatriz, 2) - 4)){
+    if(this.posicaoReveladas.length == (Math.pow(this.tamanhoMatriz, 2) - this.qtdMinas) || !this.partidaAtiva){
       return;
     }
 
     if(this.mapa[linha][coluna] === undefined){
       console.log("Posição invalida", this.mapa[linha][coluna]);
-      this.verificarPartida()
       return;
     }
 
@@ -59,8 +57,8 @@ class Jogo extends MapaMinado {
   
     this.jogadasFeitas.push([linha, coluna]);
     this.revelarPosicoes(linha, coluna);
-    // this.verificarPartida();
-    this.imprimirStatus();
+    this.verificarPartida();
+    // this.imprimirStatus();
   }
 
   revelarPosicoes(linha, coluna) {
@@ -102,23 +100,23 @@ class Jogo extends MapaMinado {
   }
 
   perdeu() {
-    this.derotas++;
-    this.statusGame = false;
+    this.derrota = true;
+    this.partidaAtiva = false;
     console.log("Perdeu");
   }
 
   venceu() {
-    this.vitorias++;
-    this.statusGame = false;
+    this.vitoria= true;
+    this.partidaAtiva = false;
     console.log("Venceu");
   }
 
   verificarPartida(){
     if(!this.jogadasFeitas.find(item => this.mapa[item[0]][item[1]] == 9)){
-      if(this.posicaoReveladas.length == (Math.pow(this.tamanhoMatriz, 2) - 4)){
+      if(this.posicaoReveladas.length == (Math.pow(this.tamanhoMatriz, 2) - this.qtdMinas)){
           this.venceu();
       }else{
-        console.log("Envie uma nova posição");
+        console.log("Envie uma posição");
       }
     }else{
       this.perdeu();
@@ -132,9 +130,7 @@ class Jogo extends MapaMinado {
       lista.push(index);
     }
     
-    console.log("--------------------------");
-    console.log( "Vitórias:", this.vitorias + " | " + "Derrotas: " + this.derotas);
-    console.log("--------------------------");
+    console.log("---------Seu Mapa -----------------");
     console.log("   ", lista.join(", "));
 
     this.updateMapaJogadas();
@@ -146,20 +142,3 @@ class Jogo extends MapaMinado {
     this.verificarPartida();
   }
 }
-
-let game = new Jogo();
-game.init();
-// game.jogada(0,15)
-
-game.jogada(0,0)
-game.jogada(0,0)
-game.jogada(2,3)
-game.jogada(0,3)
-game.jogada(0,4)
-game.jogada(0,5)
-game.jogada(4,0)
-game.jogada(5,0)
-game.jogada(5,1)
-game.jogada(5,2)
-
-game.jogada(0,2)
