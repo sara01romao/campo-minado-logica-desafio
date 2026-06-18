@@ -19,7 +19,7 @@
       </header>
       
       <div class="painel">
-        <!-- <div class="pontuacao">
+        <div class="pontuacao">
           <div class="item-pontuacao">
             <i class="fa-solid fa-trophy"></i>
             <p class="vitorias-contador">0</p>
@@ -27,9 +27,9 @@
 
           <div class="item-pontuacao">
             <i class="fa-solid fa-skull"></i>
-            <p class="vitorias-contador">0</p>
+            <p class="derrotas-contador">0</p>
           </div>
-        </div> -->
+        </div>
 
         <div class="control">
           <button id="configBtn"> 
@@ -41,15 +41,19 @@
           </button>
         </div>
       </div>
-      
+
+       <h3 class="title-resultado venceu"><i class="fa-solid fa-trophy"></i> Você Ganhou</h3>
+       <h3 class="title-resultado perdeu"><i class="fa-solid fa-skull"></i> Você Perdeu</h3>
     </div>
-    
+ 
     <div id="mapaArea"></div>
   </main>
 
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script  src="./scripts/mapa.js"></script>
-  <script defer src="./scripts/gerar-campo.js"></script>
-
+  <script  src="./scripts/mapa.js"></script> 
+  <script src="./scripts/logic.js"></script>
+  <script src="./scripts/pontuacao.js"></script>
+  <script src="./scripts/jogo.js"></script>
+  
 </body>
 </html>
