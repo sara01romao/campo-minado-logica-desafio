@@ -1,9 +1,9 @@
-export class MapaMinado{
+class MapaMinado{
   constructor(tamanho, dificuldade){
     this.tamanhoMatriz = tamanho ?? 6;
     this.dificuldade = dificuldade ?? 0.3;
     this.qtdMinas = 0;
-    this.listaMinas = [[0,2], [1,3], [4,1], [4,2]];
+    this.listaMinas = [];
     this.mapa = [];
   }
 
@@ -15,11 +15,11 @@ export class MapaMinado{
 
   initialize(){
     this.calcQtdMinas();
-    // this.criarMinas();
+    this.criarMinas();
     this.inicializaMapa();
     this.adicionarMinasMapa();
     this.vericarQtdMinas();
-    this.imprimir();
+    // this.imprimir();
   }
 
   calcQtdMinas(){
